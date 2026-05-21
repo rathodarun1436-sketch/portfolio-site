@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Send, MessageSquare } from 'lucide-react';
-import { collection, addDoc, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
 interface Review {
@@ -28,23 +28,26 @@ export default function Reviews() {
     // Timeout fallback — stop spinner after 6s if Firebase doesn't respond
     const timer = setTimeout(() => setLoading(false), 6000);
 
-    const q = query(collection(db, REVIEWS_COL), orderBy('createdAt', 'desc'));
     const unsub = onSnapshot(
-      q,
+      collection(db, REVIEWS_COL),
       (snap) => {
         clearTimeout(timer);
-        setReviews(snap.docs.map(doc => {
+        const loaded = snap.docs.map(doc => {
           const d = doc.data();
           const ts = d.createdAt?.toDate?.();
           return {
             id: doc.id,
-            stars: d.stars,
-            comment: d.comment,
+            stars: d.stars as number,
+            comment: d.comment as string,
             date: ts
               ? ts.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })
               : 'Just now',
+            _ts: ts ? ts.getTime() : Date.now(),
           };
-        }));
+        });
+        // Sort newest first client-side — avoids Firestore index requirement
+        loaded.sort((a, b) => b._ts - a._ts);
+        setReviews(loaded.map(({ _ts: _, ...r }) => r));
         setLoading(false);
       },
       () => { clearTimeout(timer); setLoading(false); }
@@ -82,10 +85,11 @@ export default function Reviews() {
         createdAt: serverTimestamp(),
       });
       // Firestore onSnapshot will replace the optimistic entry automatically
-    } catch {
+    } catch (err: unknown) {
       // Roll back optimistic entry on failure
       setReviews(prev => prev.filter(r => r.id !== optimisticId));
-      setError('Failed to submit. Please try again.');
+      const msg = err instanceof Error ? err.message : String(err);
+      setError(`Failed to save: ${msg}`);
     }
   };
 

@@ -50,7 +50,7 @@ export const projects = [
     id: 2,
     title: 'InternationalPG',
     subtitle: 'International Payment Gateway',
-    company: 'Omnissolution',
+    company: 'Omnissolutio',
     companyColor: '#6366f1',
     description: 'High-throughput international payment gateway supporting multi-currency Pay-In, Payout, and Refund workflows with real-time transaction processing and reconciliation. Drools Rule Engine powers dynamic fraud detection and transaction eligibility rules. Firebase delivers instant push notifications; Mobicomm handles SMS confirmations. Full Onboarding & KYC module with document verification flows.',
     tags: ['Java 21', 'Spring Boot', 'Kafka', 'Drools Rule Engine', 'Redis Cache', 'Firebase', 'Mobicomm', 'Swagger/OpenAPI', 'PostgreSQL'],

@@ -201,17 +201,19 @@ function FeaturedCard({ project, i }: { project: Project; i: number }) {
             ))}
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
-            <motion.a href={project.github} target="_blank" rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 6,
-                padding: '0.6rem 1.3rem', borderRadius: '0.65rem',
-                border: '1px solid var(--border)', background: 'var(--surface2)',
-                color: 'var(--text)', fontSize: '0.85rem', textDecoration: 'none', fontWeight: 600,
-              }}
-            >
-              <GithubIcon size={15} /> Code
-            </motion.a>
+            {project.github && (
+              <motion.a href={project.github} target="_blank" rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  padding: '0.6rem 1.3rem', borderRadius: '0.65rem',
+                  border: '1px solid var(--border)', background: 'var(--surface2)',
+                  color: 'var(--text)', fontSize: '0.85rem', textDecoration: 'none', fontWeight: 600,
+                }}
+              >
+                <GithubIcon size={15} /> Code
+              </motion.a>
+            )}
             {project.live && (
               <motion.a href={project.live} target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, boxShadow: `0 6px 24px ${a}40` }} whileTap={{ scale: 0.96 }}

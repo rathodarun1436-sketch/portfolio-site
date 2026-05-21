@@ -52,7 +52,7 @@ function ProfileCard() {
         transformStyle: 'preserve-3d',
         position: 'relative',
         margin: '0 auto 2rem',
-        width: 'min(400px, 92vw)', aspectRatio: '400 / 440',
+        width: 'min(420px, 92vw)', aspectRatio: '420 / 460',
         cursor: 'default',
         willChange: 'transform',
         filter: hovered
@@ -149,6 +149,65 @@ function ProfileCard() {
         <div style={{ position: 'absolute', bottom: 0, right: 0, width: 44, height: 44, borderBottom: '1.5px solid rgba(236,72,153,0.6)', borderRight: '1.5px solid rgba(236,72,153,0.6)', borderRadius: '0 0 2rem 0' }} />
       </div>
 
+      {/* ── Orbit rings ── */}
+      {/* Inner ring — clockwise */}
+      <div className="orbit-inner" style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: 0, height: 0, zIndex: 2,
+        animation: 'orbitCW 10s linear infinite',
+      }}>
+        {['React', 'TypeScript', 'Java 21', 'Spring Boot', 'Kafka', 'Redis'].map((word, i) => {
+          const angle = (360 / 6) * i;
+          const colors = ['#6366f1','#3b82f6','#f59e0b','#10b981','#ec4899','#a78bfa'];
+          return (
+            <span key={word} style={{
+              position: 'absolute',
+              transform: `rotate(${angle}deg) translateX(138px)`,
+              display: 'inline-block',
+            }}>
+              <span style={{
+                display: 'inline-block',
+                animation: `counterCW 10s linear infinite`,
+                fontSize: '0.65rem', fontWeight: 700, fontFamily: 'monospace',
+                color: colors[i], whiteSpace: 'nowrap',
+                background: `${colors[i]}18`,
+                border: `1px solid ${colors[i]}40`,
+                padding: '2px 8px', borderRadius: 6,
+                transform: 'translateX(-50%)',
+              }}>{word}</span>
+            </span>
+          );
+        })}
+      </div>
+
+      {/* Outer ring — counter-clockwise */}
+      <div className="orbit-outer" style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: 0, height: 0, zIndex: 2,
+        animation: 'orbitCCW 18s linear infinite',
+      }}>
+        {['PostgreSQL', 'Docker', 'JWT Auth', 'REST API', 'Git', 'Swagger'].map((word, i) => {
+          const angle = (360 / 6) * i + 30;
+          const colors = ['#f59e0b','#3b82f6','#10b981','#6366f1','#ec4899','#a78bfa'];
+          return (
+            <span key={word} style={{
+              position: 'absolute',
+              transform: `rotate(${angle}deg) translateX(188px)`,
+              display: 'inline-block',
+            }}>
+              <span style={{
+                display: 'inline-block',
+                animation: `counterCCW 18s linear infinite`,
+                fontSize: '0.6rem', fontWeight: 600, fontFamily: 'monospace',
+                color: colors[i], whiteSpace: 'nowrap',
+                opacity: 0.75,
+                transform: 'translateX(-50%)',
+              }}>{word}</span>
+            </span>
+          );
+        })}
+      </div>
+
       {/* ── Pulsing glow ── */}
       <motion.div
         animate={{ opacity: [0.4, 0.9, 0.4], scale: [1, 1.06, 1] }}
@@ -156,7 +215,7 @@ function ProfileCard() {
         style={{
           position: 'absolute', top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 320, height: 390, borderRadius: '2rem',
+          width: 280, height: 340, borderRadius: '2rem',
           background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)',
           filter: 'blur(20px)', zIndex: 1,
           pointerEvents: 'none',
@@ -192,7 +251,7 @@ function ProfileCard() {
             src={profilePhoto}
             alt="Arun R"
             style={{
-              width: 'min(300px, 78%)', aspectRatio: '4 / 5', height: 'auto',
+              width: 'min(210px, 52%)', aspectRatio: '4 / 5', height: 'auto',
               borderRadius: '1.5rem',
               objectFit: 'cover',
               objectPosition: 'top center',
@@ -398,6 +457,10 @@ export default function About() {
           0%,100% { box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
           50%      { box-shadow: 0 0 0 6px rgba(255,255,255,0.08); }
         }
+        @keyframes orbitCW   { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
+        @keyframes orbitCCW  { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }
+        @keyframes counterCW  { from { transform: translateX(-50%) rotate(0deg);   } to { transform: translateX(-50%) rotate(-360deg);  } }
+        @keyframes counterCCW { from { transform: translateX(-50%) rotate(0deg);   } to { transform: translateX(-50%) rotate(360deg);   } }
       `}</style>
     </section>
   );

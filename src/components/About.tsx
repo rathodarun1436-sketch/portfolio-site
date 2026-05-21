@@ -52,7 +52,7 @@ function ProfileCard() {
         transformStyle: 'preserve-3d',
         position: 'relative',
         margin: '0 auto 2rem',
-        width: 'min(420px, 92vw)', aspectRatio: '420 / 460',
+        width: 'min(360px, 90vw)', aspectRatio: '360 / 400',
         cursor: 'default',
         willChange: 'transform',
         filter: hovered
@@ -251,7 +251,7 @@ function ProfileCard() {
             src={profilePhoto}
             alt="Arun R"
             style={{
-              width: 'min(210px, 52%)', aspectRatio: '4 / 5', height: 'auto',
+              width: 'min(250px, 69%)', aspectRatio: '4 / 5', height: 'auto',
               borderRadius: '1.5rem',
               objectFit: 'cover',
               objectPosition: 'top center',

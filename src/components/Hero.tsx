@@ -5,7 +5,7 @@ import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { personal } from '../data';
 
-const profilePhoto = '/src/assets/profile.jpg';
+import profilePhoto from '../assets/profile.jpg';
 
 /* ── Floating particles ─────────────────────────────────────────── */
 const PARTICLES = Array.from({ length: 22 }, (_, i) => ({

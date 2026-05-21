@@ -5,7 +5,7 @@ import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { personal, stats } from '../data';
 import { useCountUp } from '../hooks/useCountUp';
 
-const profilePhoto = '/src/assets/profile.jpg';
+import profilePhoto from '../assets/profile.jpg';
 
 const TECH_WORDS = [
   { text: '<React />',  x: '4%',  y: '6%',  delay: 0,   color: 'var(--accent)' },

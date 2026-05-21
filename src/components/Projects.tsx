@@ -259,8 +259,16 @@ function ProjectCard({ project, i }: { project: Project; i: number }) {
       exit={{ opacity: 0, scale: 0.93 }}
       transition={{ duration: 0.4, delay: i * 0.1 }}
       onMouseMove={onMove}
-      onMouseEnter={() => sc.set(1.03)}
-      onMouseLeave={() => { rX.set(0); rY.set(0); sc.set(1); setGlare(g => ({ ...g, on: false })); }}
+      onMouseEnter={e => {
+        sc.set(1.03);
+        (e.currentTarget as HTMLElement).style.borderColor = `${a}50`;
+        (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px ${a}25`;
+      }}
+      onMouseLeave={e => {
+        rX.set(0); rY.set(0); sc.set(1); setGlare(g => ({ ...g, on: false }));
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
+        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+      }}
       style={{
         rotateX: rX, rotateY: rY, scale: sc,
         transformStyle: 'preserve-3d',
@@ -273,14 +281,6 @@ function ProjectCard({ project, i }: { project: Project; i: number }) {
         willChange: 'transform',
         cursor: 'default',
         transition: 'border-color 0.3s, box-shadow 0.3s',
-      }}
-      onMouseEnterCapture={e => {
-        (e.currentTarget as HTMLElement).style.borderColor = `${a}50`;
-        (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px ${a}25`;
-      }}
-      onMouseLeaveCapture={e => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
       }}
     >
       {/* Top accent bar */}

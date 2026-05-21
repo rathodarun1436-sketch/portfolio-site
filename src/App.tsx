@@ -20,10 +20,10 @@ export default function App() {
         <Hero />
         <About />
         <Skills />
-        <Reviews />
         <Projects />
         <Experience />
         <Contact />
+        <Reviews />
       </main>
       <Footer />
       <Chatbot />

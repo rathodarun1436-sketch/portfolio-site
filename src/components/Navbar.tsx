@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon, Code2 } from 'lucide-react';
 
-const NAV_LINKS = ['Home', 'About', 'Skills', 'Reviews', 'Projects', 'Experience', 'Contact'];
+const NAV_LINKS = ['Home', 'About', 'Skills', 'Projects', 'Experience', 'Contact', 'Reviews'];
 
 interface NavbarProps {
   theme: 'dark' | 'light';

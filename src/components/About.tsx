@@ -7,20 +7,6 @@ import { useCountUp } from '../hooks/useCountUp';
 
 import profilePhoto from '../assets/profile.jpg';
 
-const TECH_WORDS = [
-  { text: '<React />',  x: '4%',  y: '6%',  delay: 0,   color: 'var(--accent)' },
-  { text: 'TypeScript', x: '52%', y: '4%',  delay: 0.6, color: '#3b82f6' },
-  { text: 'Python',     x: '4%',  y: '78%', delay: 1.1, color: 'var(--green)' },
-  { text: 'Node.js',    x: '55%', y: '82%', delay: 1.6, color: 'var(--green)' },
-  { text: '{ }',        x: '2%',  y: '44%', delay: 0.4, color: 'var(--pink)' },
-  { text: '=>',         x: '82%', y: '42%', delay: 0.9, color: 'var(--accent)' },
-  { text: 'async',      x: '64%', y: '58%', delay: 1.3, color: '#a78bfa' },
-  { text: 'const',      x: '2%',  y: '28%', delay: 0.2, color: '#f59e0b' },
-  { text: 'SQL',        x: '76%', y: '18%', delay: 1.9, color: '#3b82f6' },
-  { text: 'API',        x: '6%',  y: '60%', delay: 0.7, color: '#f59e0b' },
-  { text: 'Git',        x: '74%', y: '70%', delay: 2.1, color: 'var(--pink)' },
-  { text: '</>',        x: '40%', y: '89%', delay: 0.5, color: 'var(--accent)' },
-] as const;
 
 /* ── 3-D tilt profile card ──────────────────────────────────────── */
 function ProfileCard() {
@@ -66,7 +52,7 @@ function ProfileCard() {
         transformStyle: 'preserve-3d',
         position: 'relative',
         margin: '0 auto 2rem',
-        width: 'min(460px, 92vw)', aspectRatio: '460 / 500',
+        width: 'min(400px, 92vw)', aspectRatio: '400 / 440',
         cursor: 'default',
         willChange: 'transform',
         filter: hovered
@@ -101,41 +87,66 @@ function ProfileCard() {
         }}
       />
 
-      {/* ── Dark tech card background ── */}
+      {/* ── Aurora card background ── */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: '2rem',
-        background: 'linear-gradient(135deg, rgba(6,6,18,0.96) 0%, rgba(20,8,50,0.93) 100%)',
-        overflow: 'hidden',
-        boxShadow: hovered ? 'inset 0 0 40px rgba(99,102,241,0.12)' : 'none',
-        zIndex: 1,
+        background: 'linear-gradient(145deg, #06060f 0%, #0d0620 50%, #060a18 100%)',
+        overflow: 'hidden', zIndex: 1,
       }}>
-        {/* Dot grid */}
+        {/* Aurora blob 1 — purple */}
+        <motion.div
+          animate={{ x: [0, 30, -20, 0], y: [0, -20, 30, 0], scale: [1, 1.2, 0.9, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+          style={{
+            position: 'absolute', top: '-20%', left: '-10%',
+            width: '70%', height: '70%', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(99,102,241,0.55) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+        />
+        {/* Aurora blob 2 — pink */}
+        <motion.div
+          animate={{ x: [0, -25, 20, 0], y: [0, 30, -15, 0], scale: [1, 0.85, 1.15, 1] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+          style={{
+            position: 'absolute', bottom: '-15%', right: '-15%',
+            width: '65%', height: '65%', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(236,72,153,0.5) 0%, transparent 70%)',
+            filter: 'blur(45px)',
+          }}
+        />
+        {/* Aurora blob 3 — teal */}
+        <motion.div
+          animate={{ x: [0, 20, -30, 0], y: [0, -30, 10, 0], scale: [1, 1.1, 0.95, 1] }}
+          transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+          style={{
+            position: 'absolute', top: '30%', right: '-10%',
+            width: '55%', height: '55%', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(16,185,129,0.35) 0%, transparent 70%)',
+            filter: 'blur(38px)',
+          }}
+        />
+        {/* Aurora blob 4 — indigo centre glow */}
+        <motion.div
+          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+          style={{
+            position: 'absolute', top: '50%', left: '50%',
+            transform: 'translate(-50%,-50%)',
+            width: '80%', height: '80%', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 65%)',
+            filter: 'blur(30px)',
+          }}
+        />
+        {/* Subtle noise texture overlay */}
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundImage: 'radial-gradient(rgba(99,102,241,0.25) 1px, transparent 1px)',
-          backgroundSize: '22px 22px',
-          opacity: 0.6,
+          background: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'0.04\'/%3E%3C/svg%3E")',
+          opacity: 0.4,
         }} />
         {/* Corner accents */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: 40, height: 40, borderTop: '2px solid var(--accent)', borderLeft: '2px solid var(--accent)', borderRadius: '2rem 0 0 0' }} />
-        <div style={{ position: 'absolute', bottom: 0, right: 0, width: 40, height: 40, borderBottom: '2px solid var(--pink)', borderRight: '2px solid var(--pink)', borderRadius: '0 0 2rem 0' }} />
-
-        {/* Floating tech keywords */}
-        {TECH_WORDS.map(({ text, x, y, delay, color }) => (
-          <motion.span
-            key={text}
-            animate={{ y: [0, -6, 0], opacity: [0.35, 0.85, 0.35] }}
-            transition={{ duration: 3 + delay * 0.5, repeat: Infinity, delay, ease: 'easeInOut' }}
-            style={{
-              position: 'absolute', left: x, top: y,
-              fontSize: '0.68rem', fontFamily: 'monospace',
-              color, fontWeight: 700, userSelect: 'none',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {text}
-          </motion.span>
-        ))}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: 44, height: 44, borderTop: '1.5px solid rgba(99,102,241,0.6)', borderLeft: '1.5px solid rgba(99,102,241,0.6)', borderRadius: '2rem 0 0 0' }} />
+        <div style={{ position: 'absolute', bottom: 0, right: 0, width: 44, height: 44, borderBottom: '1.5px solid rgba(236,72,153,0.6)', borderRight: '1.5px solid rgba(236,72,153,0.6)', borderRadius: '0 0 2rem 0' }} />
       </div>
 
       {/* ── Pulsing glow ── */}
@@ -181,7 +192,7 @@ function ProfileCard() {
             src={profilePhoto}
             alt="Arun R"
             style={{
-              width: 'min(290px, 63%)', aspectRatio: '4 / 5', height: 'auto',
+              width: 'min(300px, 78%)', aspectRatio: '4 / 5', height: 'auto',
               borderRadius: '1.5rem',
               objectFit: 'cover',
               objectPosition: 'top center',

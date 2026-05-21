@@ -25,23 +25,31 @@ export default function Reviews() {
 
   // Real-time listener — all visitors see the same reviews
   useEffect(() => {
+    // Timeout fallback — stop spinner after 6s if Firebase doesn't respond
+    const timer = setTimeout(() => setLoading(false), 6000);
+
     const q = query(collection(db, REVIEWS_COL), orderBy('createdAt', 'desc'));
-    const unsub = onSnapshot(q, (snap) => {
-      setReviews(snap.docs.map(doc => {
-        const d = doc.data();
-        const ts = d.createdAt?.toDate?.();
-        return {
-          id: doc.id,
-          stars: d.stars,
-          comment: d.comment,
-          date: ts
-            ? ts.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })
-            : 'Just now',
-        };
-      }));
-      setLoading(false);
-    });
-    return () => unsub();
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        clearTimeout(timer);
+        setReviews(snap.docs.map(doc => {
+          const d = doc.data();
+          const ts = d.createdAt?.toDate?.();
+          return {
+            id: doc.id,
+            stars: d.stars,
+            comment: d.comment,
+            date: ts
+              ? ts.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })
+              : 'Just now',
+          };
+        }));
+        setLoading(false);
+      },
+      () => { clearTimeout(timer); setLoading(false); }
+    );
+    return () => { unsub(); clearTimeout(timer); };
   }, []);
 
   const avgStars = reviews.length

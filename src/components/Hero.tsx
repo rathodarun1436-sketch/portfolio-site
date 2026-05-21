@@ -304,7 +304,7 @@ export default function Hero() {
       }} />
 
       {/* ── Main content: 2-column ── */}
-      <div className="max-w-7xl mx-auto px-6 w-full" style={{ paddingTop: '6rem', paddingBottom: '4rem', position: 'relative', zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 w-full hero-content" style={{ paddingTop: '6rem', paddingBottom: '4rem', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center', gap: '4rem' }}
           className="hero-grid">
 
@@ -482,6 +482,10 @@ export default function Hero() {
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .hero-card-col { display: none; }
+        }
+        @media (max-width: 640px) {
+          .hero-content { padding-top: 5rem !important; padding-bottom: 3rem !important; gap: 1.5rem !important; }
+          .hero-bio { font-size: 0.92rem !important; }
         }
       `}</style>
     </section>

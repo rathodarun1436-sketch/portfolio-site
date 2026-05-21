@@ -1,7 +1,7 @@
 export const personal = {
   name: 'Arun Rathod',
-  title: 'Full Stack Developer',
-  roles: ['Full Stack Developer', 'Java Developer', 'React Developer', 'Spring Boot Expert'],
+  title: 'Software Engineer',
+  roles: ['Software Engineer', 'Java Developer', 'React Developer', 'Spring Boot Expert'],
   bio: "I'm a passionate full-stack developer who loves building scalable, production-ready web applications. I specialize in Java Spring Boot APIs and modern React frontends — focused on clean architecture, great user experience, and shipping things that actually work.",
   email: 'rathodarun1436@gmail.com',
   github: 'https://github.com/rathodarun1436-sketch',
@@ -76,7 +76,6 @@ export const projects = [
     featured: true,
     year: '2025',
   },
-
   {
     id: 3,
     title: 'Task Manager',

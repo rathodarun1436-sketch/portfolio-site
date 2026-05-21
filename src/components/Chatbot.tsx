@@ -39,7 +39,7 @@ function getResponse(input: string): string {
 
   // ── Role & title ───────────────────────────────────────────────
   if (msg.includes('what do you do') || msg.includes('role') || msg.includes('position') || msg.includes('title') || msg.includes('job')) {
-    return `Arun is a Full Stack Developer specialising in Java Spring Boot backends and React frontends. He currently works as a Software Engineer at Omnissolution in Dubai, building large-scale fintech platforms.`;
+    return `Arun is a Software Engineer specialising in Java Spring Boot backends and React frontends. He currently works at Omnissolution in Dubai, building large-scale fintech platforms.`;
   }
 
   // ── Specialisation & strengths ─────────────────────────────────
@@ -231,7 +231,7 @@ export default function Chatbot() {
   return (
     <>
       {/* Floating button */}
-      <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 1000 }}>
+      <div style={{ position: 'fixed', bottom: '1.5rem', right: '1rem', zIndex: 1000 }}>
         {/* Pulse ring */}
         {!open && (
           <motion.div
@@ -275,8 +275,8 @@ export default function Chatbot() {
             exit={{ opacity: 0, y: 24, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 320, damping: 26 }}
             style={{
-              position: 'fixed', bottom: '6.5rem', right: '2rem', zIndex: 999,
-              width: 360,
+              position: 'fixed', bottom: '6.5rem', right: '1rem', zIndex: 999,
+              width: 'min(360px, calc(100vw - 2rem))',
               background: 'var(--surface)',
               border: '1px solid var(--border)',
               borderRadius: '1.25rem',

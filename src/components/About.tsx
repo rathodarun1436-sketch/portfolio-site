@@ -65,8 +65,8 @@ function ProfileCard() {
         rotateX: rX, rotateY: rY, scale: sc,
         transformStyle: 'preserve-3d',
         position: 'relative',
-        marginBottom: '2rem',
-        width: 380, height: 420,
+        margin: '0 auto 2rem',
+        width: 'min(380px, 90vw)', aspectRatio: '380 / 420',
         cursor: 'default',
         willChange: 'transform',
         filter: hovered
@@ -181,7 +181,7 @@ function ProfileCard() {
             src={profilePhoto}
             alt="Arun R"
             style={{
-              width: 240, height: 300,
+              width: 'min(240px, 63%)', aspectRatio: '4 / 5', height: 'auto',
               borderRadius: '1.5rem',
               objectFit: 'cover',
               objectPosition: 'top center',
@@ -316,7 +316,7 @@ export default function About() {
               {[
                 { icon: <MapPin size={16} />, text: personal.location },
                 { icon: <Mail size={16} />, text: personal.email },
-                { icon: <Briefcase size={16} />, text: 'Full Stack Developer' },
+                { icon: <Briefcase size={16} />, text: 'Software Engineer' },
               ].map(({ icon, text }) => (
                 <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'var(--text)', fontSize: '0.9rem' }}>
                   <span style={{ color: 'var(--accent)' }}>{icon}</span>

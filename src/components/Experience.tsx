@@ -244,6 +244,10 @@ export default function Experience() {
           0%,100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
           50%      { box-shadow: 0 0 0 6px rgba(16,185,129,0.05); }
         }
+        @media (max-width: 640px) {
+          .exp-card { padding: 1.25rem !important; }
+          .exp-row, .exp-row-right { margin-bottom: 2rem; }
+        }
       `}</style>
     </section>
   );

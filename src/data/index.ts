@@ -1,0 +1,131 @@
+export const personal = {
+  name: 'Arun Rathod',
+  title: 'Full Stack Developer',
+  roles: ['Full Stack Developer', 'Java Developer', 'React Developer', 'Spring Boot Expert'],
+  bio: "I'm a passionate full-stack developer who loves building scalable, production-ready web applications. I specialize in Java Spring Boot APIs and modern React frontends — focused on clean architecture, great user experience, and shipping things that actually work.",
+  email: 'rathodarun1436@gmail.com',
+  github: 'https://github.com/rathodarun1436-sketch',
+  linkedin: 'https://www.linkedin.com/in/arun-rathod1320',
+  location: 'India',
+  available: true,
+};
+
+export const stats = [
+  { label: 'Projects Built', value: 10, suffix: '+' },
+  { label: 'Technologies', value: 20, suffix: '+' },
+  { label: 'Years Coding', value: 4, suffix: '+' },
+  { label: 'GitHub Repos', value: 8, suffix: '' },
+];
+
+export const skills = [
+  {
+    category: 'Frontend',
+    color: '#6366f1',
+    items: ['React 18', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML & CSS', 'Vite', 'Framer Motion', 'React Query'],
+  },
+  {
+    category: 'Backend',
+    color: '#10b981',
+    items: ['Spring Boot 4', 'Java 21', 'REST APIs', 'JWT Auth', 'Spring Security', 'Hibernate', 'Flyway', 'Swagger/OpenAPI'],
+  },
+  {
+    category: 'Database',
+    color: '#f59e0b',
+    items: ['PostgreSQL', 'MySQL', 'H2 (Dev)', 'JPA / ORM', 'Flyway Migrations'],
+  },
+  {
+    category: 'Messaging & Caching',
+    color: '#f97316',
+    items: ['Apache Kafka', 'Redis Cache', 'Kafka Producer/Consumer', 'Redis Pub/Sub', 'Event-Driven Architecture', 'Cache Invalidation', 'Firebase Notifications', 'Mobicomm SMS', 'Email Service', 'Drools Rule Engine'],
+  },
+  {
+    category: 'Tools & DevOps',
+    color: '#ec4899',
+    items: ['Git & GitHub', 'Docker', 'Railway', 'Vercel', 'IntelliJ IDEA', 'VS Code', 'Postman', 'Maven'],
+  },
+];
+
+export const projects = [
+   {
+    id: 2,
+    title: 'InternationalPG',
+    subtitle: 'International Payment Gateway',
+    company: 'Omnissolution',
+    companyColor: '#6366f1',
+    description: 'High-throughput international payment gateway supporting multi-currency Pay-In, Payout, and Refund workflows with real-time transaction processing and reconciliation. Drools Rule Engine powers dynamic fraud detection and transaction eligibility rules. Firebase delivers instant push notifications; Mobicomm handles SMS confirmations. Full Onboarding & KYC module with document verification flows.',
+    tags: ['Java 21', 'Spring Boot', 'Kafka', 'Drools Rule Engine', 'Redis Cache', 'Firebase', 'Mobicomm', 'Swagger/OpenAPI', 'PostgreSQL'],
+    category: 'Fintech',
+    accent: '#6366f1',
+    github: '#',
+    live: '#',
+    featured: true,
+    year: '2026',
+  },
+  {
+    id: 1,
+    title: 'AshapurtiLoans',
+    subtitle: 'Loan Origination & Management System',
+    company: 'GLLFL',
+    companyColor: '#10b981',
+    description: 'Enterprise LOS/LMS platform handling the complete loan lifecycle — from application intake, KYC verification, and credit scoring to approval workflows, disbursement, and repayment tracking. Built an automated EMI & interest calculation engine, integrated Kafka for async notification pipelines, and added multi-channel alerts via email and SMS for borrowers and loan officers.',
+    tags: ['Java', 'Spring Boot', 'React', 'PostgreSQL', 'Apache Kafka', 'Flyway', 'JWT', 'Email/SMS'],
+    category: 'Fintech',
+    accent: '#f59e0b',
+    github: '#',
+    live: '#',
+    featured: true,
+    year: '2025',
+  },
+
+  {
+    id: 3,
+    title: 'Task Manager',
+    subtitle: 'Full-Stack Project Management',
+    company: 'Personal',
+    companyColor: '#ec4899',
+    description: 'Full-stack task management system with JWT authentication, role-based access control, project boards, and real-time task tracking. Built with Spring Boot 4 + React 18.',
+    tags: ['Spring Boot', 'React', 'PostgreSQL', 'JWT', 'TypeScript'],
+    category: 'Full Stack',
+    accent: '#ec4899',
+    github: 'https://github.com/rathodarun1436-sketch/task_manager',
+    live: '#',
+    featured: false,
+    year: '2024',
+  },
+  {
+    id: 4,
+    title: 'Portfolio Website',
+    subtitle: 'Personal Developer Portfolio',
+    company: 'Personal',
+    companyColor: '#8b5cf6',
+    description: 'Modern developer portfolio built with React + TypeScript featuring smooth animations, dark/light mode, typewriter effect, 3D tilt interactions, and full responsive design.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    category: 'Frontend',
+    accent: '#8b5cf6',
+    github: '#',
+    live: '#',
+    featured: false,
+    year: '2026',
+  },
+];
+
+export const experience = [
+  {
+    role: 'Software Engineer',
+    company: 'Omnissolutio',
+    period: '2026 – Present',
+    type: 'Full-time',
+    location: 'Dubai, UAE',
+    description: 'Architecting and delivering a large-scale fintech platform on Java 21 & Spring Boot with a modular microservices design. Built core financial modules — Pay-In, Payout, and Refund — with end-to-end transaction lifecycle management and reconciliation logic. Developed a full Onboarding & KYC module with document verification workflows and compliance checks. Applied Drools Rule Engine for dynamic, configurable business rule execution across transaction validation and eligibility logic. Leveraged Apache Kafka for high-throughput async event streaming between services. Integrated email notification service for transactional and system alerts, Firebase for real-time push/popup notifications, and Mobicomm for SMS delivery. All APIs documented and tested via Swagger / OpenAPI.',
+    skills: ['Java 21', 'Spring Boot', 'Swagger / OpenAPI', 'Apache Kafka', 'Drools Rule Engine', 'Redis Cache', 'Pay-In Module', 'Payout Module', 'Refund Module', 'Onboarding & KYC', 'Email Notifications', 'Firebase', 'Mobicomm SMS', 'PostgreSQL', 'React', 'TypeScript'],
+  },
+  {
+    role: 'Software Engineer',
+    company: 'GLLFL',
+    period: '2025 – 2026',
+    type: 'Full-time',
+    location: 'Mumbai, India',
+    description: 'Developed a Loan Origination & Management System (LOS/LMS) from the ground up — covering end-to-end loan lifecycle from application intake to disbursement. Built automated loan calculation engines for EMI, interest, and repayment schedules. Integrated Apache Kafka for asynchronous notification pipelines, email service for transactional alerts, and SMS service for real-time borrower updates. Implemented REST APIs with JWT authentication and managed database schema migrations with Flyway.',
+    skills: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'JWT', 'Flyway', 'Apache Kafka', 'Email Service', 'SMS Service', 'Loan Calculation'],
+  },
+];

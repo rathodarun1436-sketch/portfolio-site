@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Send, MessageSquare, Loader } from 'lucide-react';
+import { Star, Send, MessageSquare } from 'lucide-react';
 import { collection, addDoc, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
@@ -19,7 +19,7 @@ export default function Reviews() {
   const [stars, setStars] = useState(0);
   const [hoverStar, setHoverStar] = useState(0);
   const [comment, setComment] = useState('');
-  const [submitting, setSubmitting] = useState(false);
+
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
@@ -52,22 +52,32 @@ export default function Reviews() {
     if (!stars) { setError('Please select a star rating'); return; }
     if (!comment.trim()) { setError('Please write a comment'); return; }
 
-    setSubmitting(true);
+    // Optimistic update — show instantly, save in background
+    const optimisticId = `temp_${Date.now()}`;
+    const optimistic: Review = {
+      id: optimisticId,
+      stars,
+      comment: comment.trim(),
+      date: 'Just now',
+    };
+    setReviews(prev => [optimistic, ...prev]);
+    setStars(0);
+    setComment('');
+    setError('');
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
+
     try {
       await addDoc(collection(db, REVIEWS_COL), {
-        stars,
-        comment: comment.trim(),
+        stars: optimistic.stars,
+        comment: optimistic.comment,
         createdAt: serverTimestamp(),
       });
-      setStars(0);
-      setComment('');
-      setError('');
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 3000);
+      // Firestore onSnapshot will replace the optimistic entry automatically
     } catch {
+      // Roll back optimistic entry on failure
+      setReviews(prev => prev.filter(r => r.id !== optimisticId));
       setError('Failed to submit. Please try again.');
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -195,10 +205,9 @@ export default function Reviews() {
           </AnimatePresence>
 
           <motion.button
-            whileHover={{ scale: submitting ? 1 : 1.03 }}
-            whileTap={{ scale: submitting ? 1 : 0.96 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.96 }}
             onClick={handleSubmit}
-            disabled={submitting}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: submitted
@@ -206,24 +215,21 @@ export default function Reviews() {
                 : 'linear-gradient(135deg, #6366f1, #ec4899)',
               color: '#fff', border: 'none', borderRadius: '0.75rem',
               padding: '0.75rem 1.75rem', fontSize: '0.95rem', fontWeight: 600,
-              cursor: submitting ? 'not-allowed' : 'pointer',
-              opacity: submitting ? 0.8 : 1,
-              transition: 'background 0.4s, opacity 0.2s',
+              cursor: 'pointer',
+              transition: 'background 0.4s',
             }}
           >
-            {submitting
-              ? <><Loader size={16} style={{ animation: 'spin 0.8s linear infinite' }} /> Submitting...</>
-              : submitted
-                ? 'Thank you! 🎉'
-                : <><Send size={16} /> Submit Review</>
+            {submitted
+              ? 'Thank you! 🎉'
+              : <><Send size={16} /> Submit Review</>
             }
           </motion.button>
         </motion.div>
 
         {/* Reviews list */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text)', opacity: 0.5 }}>
-            <Loader size={24} style={{ animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text)', opacity: 0.5, fontSize: '0.9rem' }}>
+            Loading reviews...
           </div>
         ) : reviews.length === 0 ? (
           <motion.p

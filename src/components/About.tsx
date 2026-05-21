@@ -57,7 +57,7 @@ function ProfileCard() {
       style={{
         rotateX: rX, rotateY: rY, scale: sc,
         transformStyle: 'preserve-3d',
-        position: 'relative', margin: '0 auto 2rem',
+        position: 'relative', margin: '0 0 2rem',
         width: 'min(360px, 88vw)', aspectRatio: '1 / 1',
         cursor: 'default', willChange: 'transform',
       }}

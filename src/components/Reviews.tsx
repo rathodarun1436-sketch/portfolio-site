@@ -214,38 +214,39 @@ export default function Reviews() {
                 {reviews.length} Review{reviews.length !== 1 ? 's' : ''}
               </h3>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+              gap: '0.75rem',
+            }}>
               <AnimatePresence>
                 {reviews.map((r, i) => (
                   <motion.div
                     key={r.id}
-                    initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                    initial={{ opacity: 0, y: 16, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ delay: i * 0.06, type: 'spring', stiffness: 200, damping: 18 }}
+                    transition={{ delay: i * 0.05, type: 'spring', stiffness: 220, damping: 18 }}
                     style={{
                       background: 'var(--bg)',
                       border: '1px solid var(--border)',
-                      borderRadius: '1rem',
-                      padding: '1.25rem 1.5rem',
+                      borderRadius: '0.75rem',
+                      padding: '0.85rem 1rem',
                     }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
-                      <div style={{ display: 'flex', gap: 3 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                      <div style={{ display: 'flex', gap: 2 }}>
                         {[1, 2, 3, 4, 5].map(n => (
                           <Star
-                            key={n} size={14}
+                            key={n} size={12}
                             fill={n <= r.stars ? '#f59e0b' : 'none'}
                             color={n <= r.stars ? '#f59e0b' : 'var(--border)'}
                             strokeWidth={1.5}
                           />
                         ))}
-                        <span style={{ marginLeft: 6, fontSize: '0.78rem', color: '#f59e0b', fontWeight: 600 }}>
-                          {['', 'Poor', 'Fair', 'Good', 'Great', 'Excellent'][r.stars]}
-                        </span>
                       </div>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text)', opacity: 0.5 }}>{r.date}</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text)', opacity: 0.45 }}>{r.date}</span>
                     </div>
-                    <p style={{ color: 'var(--text)', fontSize: '0.9rem', lineHeight: 1.65, margin: 0 }}>
+                    <p style={{ color: 'var(--text)', fontSize: '0.82rem', lineHeight: 1.55, margin: 0 }}>
                       {r.comment}
                     </p>
                   </motion.div>

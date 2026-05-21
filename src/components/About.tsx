@@ -66,7 +66,7 @@ function ProfileCard() {
         transformStyle: 'preserve-3d',
         position: 'relative',
         margin: '0 auto 2rem',
-        width: 'min(380px, 90vw)', aspectRatio: '380 / 420',
+        width: 'min(460px, 92vw)', aspectRatio: '460 / 500',
         cursor: 'default',
         willChange: 'transform',
         filter: hovered
@@ -145,7 +145,7 @@ function ProfileCard() {
         style={{
           position: 'absolute', top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 260, height: 320, borderRadius: '2rem',
+          width: 320, height: 390, borderRadius: '2rem',
           background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)',
           filter: 'blur(20px)', zIndex: 1,
           pointerEvents: 'none',
@@ -181,7 +181,7 @@ function ProfileCard() {
             src={profilePhoto}
             alt="Arun R"
             style={{
-              width: 'min(240px, 63%)', aspectRatio: '4 / 5', height: 'auto',
+              width: 'min(290px, 63%)', aspectRatio: '4 / 5', height: 'auto',
               borderRadius: '1.5rem',
               objectFit: 'cover',
               objectPosition: 'top center',

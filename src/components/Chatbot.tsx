@@ -39,7 +39,7 @@ function getResponse(input: string): string {
 
   // ── Role & title ───────────────────────────────────────────────
   if (msg.includes('what do you do') || msg.includes('role') || msg.includes('position') || msg.includes('title') || msg.includes('job')) {
-    return `Arun is a Software Engineer specialising in Java Spring Boot backends and React frontends. He currently works at Omnissolution in Dubai, building large-scale fintech platforms.`;
+    return `Arun is a Software Engineer specialising in Java Spring Boot backends and React frontends. He currently works at Omnissolutio in Dubai, building large-scale fintech platforms.`;
   }
 
   // ── Specialisation & strengths ─────────────────────────────────
@@ -84,7 +84,7 @@ function getResponse(input: string): string {
 
   // ── Location & timezone ────────────────────────────────────────
   if (msg.includes('location') || msg.includes('where') || msg.includes('country') || msg.includes('timezone') || msg.includes('time zone') || msg.includes('city')) {
-    return `Arun is originally from India 🇮🇳 and currently based in Dubai, UAE 🇦🇪, working full-time at Omnissolution.\n\nTimezone: GST (UTC+4)`;
+    return `Arun is originally from India 🇮🇳 and currently based in Dubai, UAE 🇦🇪, working full-time at Omnissolutio.\n\nTimezone: GST (UTC+4)`;
   }
 
   // ── Full skill list ────────────────────────────────────────────
@@ -121,7 +121,7 @@ function getResponse(input: string): string {
 
   // ── Microservices / architecture ───────────────────────────────
   if (msg.includes('microservice') || msg.includes('architecture') || msg.includes('design pattern') || msg.includes('system design')) {
-    return `Arun has hands-on experience with microservices architecture at Omnissolution — modular Spring Boot services communicating via Apache Kafka, secured with JWT, documented with Swagger/OpenAPI, and scaled with Redis caching.`;
+    return `Arun has hands-on experience with microservices architecture at Omnissolutio — modular Spring Boot services communicating via Apache Kafka, secured with JWT, documented with Swagger/OpenAPI, and scaled with Redis caching.`;
   }
 
   // ── Fintech ────────────────────────────────────────────────────

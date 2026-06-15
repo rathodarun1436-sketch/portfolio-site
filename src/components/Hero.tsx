@@ -32,14 +32,14 @@ function DevCard() {
   };
 
   const CODE_LINES = [
-    { tokens: [{ t: 'const ', c: '#c792ea' }, { t: 'developer', c: '#82aaff' }, { t: ' = {', c: '#fff' }] },
-    { tokens: [{ t: '  name', c: '#f07178' }, { t: ': ', c: '#fff' }, { t: '"Arun Rathod"', c: '#c3e88d' }, { t: ',', c: '#fff' }] },
-    { tokens: [{ t: '  role', c: '#f07178' }, { t: ': ', c: '#fff' }, { t: '"Full Stack Dev"', c: '#c3e88d' }, { t: ',', c: '#fff' }] },
-    { tokens: [{ t: '  stack', c: '#f07178' }, { t: ': [', c: '#fff' }] },
-    { tokens: [{ t: '    ', c: '#fff' }, { t: '"Java"', c: '#c3e88d' }, { t: ', ', c: '#fff' }, { t: '"React"', c: '#c3e88d' }, { t: ',', c: '#fff' }] },
-    { tokens: [{ t: '    ', c: '#fff' }, { t: '"Kafka"', c: '#c3e88d' }, { t: ', ', c: '#fff' }, { t: '"Spring"', c: '#c3e88d' }] },
-    { tokens: [{ t: '  ],', c: '#fff' }] },
-    { tokens: [{ t: '  available', c: '#f07178' }, { t: ': ', c: '#fff' }, { t: 'true', c: '#ff9cac' }] },
+    { tokens: [{ t: '@SpringBootApplication', c: '#e5c07b' }] },
+    { tokens: [{ t: 'public ', c: '#c792ea' }, { t: 'class ', c: '#c792ea' }, { t: 'Developer ', c: '#82aaff' }, { t: '{', c: '#fff' }] },
+    { tokens: [{ t: '  String ', c: '#c792ea' }, { t: 'name', c: '#f07178' }, { t: ' = ', c: '#fff' }, { t: '"Arun Rathod"', c: '#c3e88d' }, { t: ';', c: '#fff' }] },
+    { tokens: [{ t: '  String ', c: '#c792ea' }, { t: 'role', c: '#f07178' }, { t: ' = ', c: '#fff' }, { t: '"Full Stack Dev"', c: '#c3e88d' }, { t: ';', c: '#fff' }] },
+    { tokens: [{ t: '  List', c: '#c792ea' }, { t: '<String>', c: '#82aaff' }, { t: ' stack', c: '#f07178' }, { t: ' =', c: '#fff' }] },
+    { tokens: [{ t: '    List.of(', c: '#fff' }, { t: '"Java 21"', c: '#c3e88d' }, { t: ', ', c: '#fff' }, { t: '"Spring Boot"', c: '#c3e88d' }, { t: ',', c: '#fff' }] },
+    { tokens: [{ t: '    ', c: '#fff' }, { t: '"Kafka"', c: '#c3e88d' }, { t: ', ', c: '#fff' }, { t: '"React"', c: '#c3e88d' }, { t: ');', c: '#fff' }] },
+    { tokens: [{ t: '  boolean ', c: '#c792ea' }, { t: 'available', c: '#f07178' }, { t: ' = ', c: '#fff' }, { t: 'true', c: '#ff9cac' }, { t: ';', c: '#fff' }] },
     { tokens: [{ t: '}', c: '#fff' }] },
   ];
 
@@ -113,7 +113,7 @@ function DevCard() {
               <div key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c }} />
             ))}
             <span style={{ marginLeft: 8, fontSize: '0.72rem', color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>
-              developer.ts
+              Developer.java
             </span>
           </div>
 

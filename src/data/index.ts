@@ -106,6 +106,21 @@ export const projects = [
     featured: false,
     year: '2026',
   },
+  {
+    id: 5,
+    title: 'Resume Analyzer',
+    subtitle: 'AI-Powered Resume Analysis Tool',
+    company: 'Personal',
+    companyColor: '#14b8a6',
+    description: 'AI-powered resume analyzer that parses and evaluates resumes against job descriptions, providing actionable feedback, skill gap analysis, and ATS compatibility scoring to help candidates improve their chances.',
+    tags: ['React', 'TypeScript', 'AI', 'Vercel'],
+    category: 'Frontend',
+    accent: '#14b8a6',
+    github: '',
+    live: 'https://resume-analyzer-ruddy-eight.vercel.app/',
+    featured: false,
+    year: '2025',
+  },
 ];
 
 export const experience = [

@@ -26,6 +26,8 @@ const OUTER_WORDS = [
   { text: 'Swagger',    color: '#a78bfa' },
 ];
 
+const ALL_TECH = [...INNER_WORDS, ...OUTER_WORDS];
+
 function ProfileCard() {
   const cardRef = useRef<HTMLDivElement>(null);
   const rX    = useSpring(0, { stiffness: 300, damping: 22 });
@@ -33,21 +35,20 @@ function ProfileCard() {
   const sc    = useSpring(1, { stiffness: 220, damping: 18 });
   const imgSc = useSpring(1, { stiffness: 200, damping: 16 });
   const [glare, setGlare] = useState({ x: 50, y: 50, on: false });
-  const [hovered, setHovered] = useState(false);
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = cardRef.current?.getBoundingClientRect();
     if (!r) return;
     const px = (e.clientX - r.left) / r.width;
     const py = (e.clientY - r.top)  / r.height;
-    rY.set((px - 0.5) * 28);
-    rX.set(-(py - 0.5) * 28);
+    rY.set((px - 0.5) * 18);
+    rX.set(-(py - 0.5) * 18);
     setGlare({ x: px * 100, y: py * 100, on: true });
   };
-  const onEnter = () => { sc.set(1.05); imgSc.set(1.1); setHovered(true); };
+  const onEnter = () => { sc.set(1.03); imgSc.set(1.06); };
   const onLeave = () => {
     rX.set(0); rY.set(0); sc.set(1); imgSc.set(1);
-    setGlare(g => ({ ...g, on: false })); setHovered(false);
+    setGlare(g => ({ ...g, on: false }));
   };
 
   return (
@@ -58,149 +59,97 @@ function ProfileCard() {
         rotateX: rX, rotateY: rY, scale: sc,
         transformStyle: 'preserve-3d',
         position: 'relative', margin: '0 0 2rem',
-        width: 'min(360px, 88vw)', aspectRatio: '1 / 1',
+        width: 'min(300px, 88vw)',
         cursor: 'default', willChange: 'transform',
       }}
     >
-      {/* ── Spinning conic outer border ── */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-        style={{
-          position: 'absolute', inset: -3, borderRadius: '50%',
-          background: 'conic-gradient(from 0deg, #6366f1, #ec4899, #10b981, #f59e0b, #6366f1)',
-          zIndex: 0,
-        }}
-      />
-
-      {/* ── Card body — CIRCLE, overflow hidden ── */}
+      {/* Static gradient border */}
       <div style={{
-        position: 'absolute', inset: 3, borderRadius: '50%',
-        background: 'linear-gradient(145deg, #07071a 0%, #0e0524 60%, #060c1c 100%)',
-        overflow: 'hidden', zIndex: 1,
-        boxShadow: hovered
-          ? '0 0 60px rgba(99,102,241,0.5), 0 0 30px rgba(236,72,153,0.3) inset'
-          : '0 0 30px rgba(99,102,241,0.2)',
-        transition: 'box-shadow 0.4s',
-      }}>
-        {/* Aurora blobs — contained inside circle */}
-        <motion.div
-          animate={{ x: [0,25,-15,0], y: [0,-20,25,0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ position: 'absolute', top: '-10%', left: '-10%', width: '60%', height: '60%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99,102,241,0.6) 0%, transparent 70%)', filter: 'blur(35px)' }}
-        />
-        <motion.div
-          animate={{ x: [0,-20,18,0], y: [0,25,-18,0] }}
-          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '58%', height: '58%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(236,72,153,0.55) 0%, transparent 70%)', filter: 'blur(38px)' }}
-        />
-        <motion.div
-          animate={{ opacity: [0.3,0.65,0.3], scale: [1,1.12,1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '70%', height: '70%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 65%)', filter: 'blur(28px)' }}
-        />
-      </div>
-
-      {/* ── Inner orbit ring (CW, radius 112px) — outside overflow:hidden so words show ── */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%',
-        width: 0, height: 0, zIndex: 3,
-        animation: 'orbitCW 11s linear infinite',
-      }}>
-        {INNER_WORDS.map((w, i) => (
-          <span key={w.text} style={{ position: 'absolute', display: 'inline-block', transform: `rotate(${(360/6)*i}deg) translateX(112px)` }}>
-            <span style={{
-              display: 'inline-block', animation: 'counterCW 11s linear infinite',
-              fontSize: '0.62rem', fontWeight: 700, fontFamily: 'monospace',
-              color: w.color, whiteSpace: 'nowrap',
-              background: `${w.color}20`, border: `1px solid ${w.color}50`,
-              padding: '2px 8px', borderRadius: 6,
-              transform: 'translateX(-50%)',
-              boxShadow: `0 0 8px ${w.color}30`,
-            }}>{w.text}</span>
-          </span>
-        ))}
-      </div>
-
-      {/* ── Outer orbit ring (CCW, radius 156px) ── */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%',
-        width: 0, height: 0, zIndex: 3,
-        animation: 'orbitCCW 17s linear infinite',
-      }}>
-        {OUTER_WORDS.map((w, i) => (
-          <span key={w.text} style={{ position: 'absolute', display: 'inline-block', transform: `rotate(${(360/6)*i + 30}deg) translateX(156px)` }}>
-            <span style={{
-              display: 'inline-block', animation: 'counterCCW 17s linear infinite',
-              fontSize: '0.58rem', fontWeight: 600, fontFamily: 'monospace',
-              color: w.color, whiteSpace: 'nowrap', opacity: 0.85,
-              transform: 'translateX(-50%)',
-            }}>{w.text}</span>
-          </span>
-        ))}
-      </div>
-
-      {/* ── Photo (centered, large, on top) ── */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 4,
-      }}>
-        {/* Spinning ring around photo */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: hovered ? 1.5 : 5, repeat: Infinity, ease: 'linear' }}
-          style={{
-            position: 'absolute', inset: -4, borderRadius: '1.6rem',
-            background: 'conic-gradient(from 0deg, #6366f1, #ec4899, #10b981, #6366f1)',
-            zIndex: 0,
-          }}
-        />
-        <motion.div style={{ scale: imgSc, position: 'relative', zIndex: 1 }}>
-          <img
-            src={profilePhoto}
-            alt="Arun R"
-            style={{
-              width: 190, height: 238,
-              borderRadius: '1.4rem',
-              objectFit: 'cover', objectPosition: 'top center',
-              display: 'block',
-              border: '3px solid #07071a',
-              filter: 'brightness(1.04) contrast(1.05)',
-            }}
-          />
-          {/* Shimmer */}
-          <motion.div
-            initial={{ opacity: 0, x: '-100%' }}
-            whileHover={{ opacity: 1, x: '150%' }}
-            transition={{ duration: 0.55 }}
-            style={{ position: 'absolute', inset: 0, background: 'linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.2) 50%, transparent 65%)', borderRadius: '1.4rem', pointerEvents: 'none' }}
-          />
-        </motion.div>
-      </div>
-
-      {/* ── Cursor glare ── */}
-      <div style={{
-        position: 'absolute', inset: 3, borderRadius: '50%',
-        pointerEvents: 'none', zIndex: 5,
-        background: glare.on ? `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.12) 0%, transparent 60%)` : 'none',
-        transition: 'background 0.03s',
+        position: 'absolute', inset: -2, borderRadius: '1.75rem', zIndex: 0,
+        background: 'linear-gradient(135deg, #6366f1 0%, #ec4899 35%, #10b981 65%, #f59e0b 100%)',
       }} />
 
-      {/* ── Available badge ── */}
-      {personal.available && (
+      {/* Outer ambient glow */}
+      <div style={{
+        position: 'absolute', inset: -16, borderRadius: '2.5rem', zIndex: -1,
+        background: 'linear-gradient(135deg, rgba(99,102,241,0.22) 0%, rgba(236,72,153,0.14) 50%, rgba(16,185,129,0.12) 100%)',
+        filter: 'blur(20px)', pointerEvents: 'none',
+      }} />
+
+      {/* Card body */}
+      <div style={{
+        position: 'relative', zIndex: 1, borderRadius: '1.6rem',
+        background: 'linear-gradient(160deg, #0f0f23 0%, #130a25 55%, #0a1020 100%)',
+        overflow: 'hidden',
+        display: 'flex', flexDirection: 'column',
+      }}>
+        {/* Subtle mesh glows — static, no animation */}
         <div style={{
-          position: 'absolute', bottom: 18, right: 18,
-          background: 'var(--green)', color: '#fff',
-          fontSize: '0.7rem', fontWeight: 700,
-          padding: '4px 12px', borderRadius: 100,
-          border: '2px solid #07071a', zIndex: 6,
-          display: 'flex', alignItems: 'center', gap: 5,
-        }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff', boxShadow: '0 0 0 3px rgba(255,255,255,0.3)', animation: 'avatarPulse 2s infinite' }} />
-          Available
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          backgroundImage: [
+            'radial-gradient(circle at 15% 15%, rgba(99,102,241,0.12) 0%, transparent 50%)',
+            'radial-gradient(circle at 85% 80%, rgba(236,72,153,0.1) 0%, transparent 50%)',
+            'radial-gradient(circle at 50% 45%, rgba(139,92,246,0.06) 0%, transparent 55%)',
+          ].join(','),
+        }} />
+
+        {/* Photo */}
+        <div style={{ position: 'relative', overflow: 'hidden' }}>
+          <motion.img
+            style={{ scale: imgSc, display: 'block', width: '100%', height: 270 } as React.CSSProperties & { scale: typeof imgSc }}
+            src={profilePhoto}
+            alt="Arun R"
+            onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+          />
+          {/* Bottom fade */}
+          <div style={{
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: 90,
+            background: 'linear-gradient(to top, #130a25 10%, transparent 100%)',
+            pointerEvents: 'none',
+          }} />
+
+          {/* Available badge */}
+          {personal.available && (
+            <div style={{
+              position: 'absolute', top: 12, right: 12,
+              display: 'flex', alignItems: 'center', gap: 5,
+              background: 'rgba(6,8,20,0.75)', backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(16,185,129,0.55)',
+              color: '#10b981', fontSize: '0.68rem', fontWeight: 700,
+              padding: '4px 11px', borderRadius: 100,
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', animation: 'avatarPulse 2s infinite' }} />
+              Available
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Tech chips */}
+        <div style={{ padding: '0.9rem 1rem 1.1rem', display: 'flex', flexWrap: 'wrap', gap: '5px', justifyContent: 'center' }}>
+          {ALL_TECH.map(w => (
+            <motion.span
+              key={w.text}
+              whileHover={{ scale: 1.1, y: -2 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 16 }}
+              style={{
+                fontSize: '0.6rem', fontWeight: 700, fontFamily: 'monospace',
+                color: w.color, whiteSpace: 'nowrap',
+                background: `${w.color}14`, border: `1px solid ${w.color}38`,
+                padding: '3px 9px', borderRadius: '5px',
+                cursor: 'default',
+                boxShadow: `0 0 7px ${w.color}18`,
+              }}
+            >{w.text}</motion.span>
+          ))}
+        </div>
+
+        {/* Cursor glare */}
+        <div style={{
+          position: 'absolute', inset: 0, borderRadius: '1.6rem', pointerEvents: 'none', zIndex: 20,
+          background: glare.on ? `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.07) 0%, transparent 60%)` : 'none',
+          transition: 'background 0.03s',
+        }} />
+      </div>
     </motion.div>
   );
 }
@@ -322,13 +271,9 @@ export default function About() {
 
       <style>{`
         @keyframes avatarPulse {
-          0%,100% { box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
-          50%      { box-shadow: 0 0 0 6px rgba(255,255,255,0.08); }
+          0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+          50%      { box-shadow: 0 0 0 5px rgba(16,185,129,0.0); }
         }
-        @keyframes orbitCW   { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
-        @keyframes orbitCCW  { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }
-        @keyframes counterCW  { from { transform: translateX(-50%) rotate(0deg);   } to { transform: translateX(-50%) rotate(-360deg);  } }
-        @keyframes counterCCW { from { transform: translateX(-50%) rotate(0deg);   } to { transform: translateX(-50%) rotate(360deg);   } }
       `}</style>
     </section>
   );

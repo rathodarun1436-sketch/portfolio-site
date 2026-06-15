@@ -9,24 +9,6 @@ import profilePhoto from '../assets/profile.jpg';
 
 
 /* ── 3-D tilt profile card ──────────────────────────────────────── */
-const INNER_WORDS = [
-  { text: 'React',       color: '#6366f1' },
-  { text: 'TypeScript',  color: '#3b82f6' },
-  { text: 'Java 21',     color: '#f59e0b' },
-  { text: 'Spring Boot', color: '#10b981' },
-  { text: 'Kafka',       color: '#ec4899' },
-  { text: 'Redis',       color: '#a78bfa' },
-];
-const OUTER_WORDS = [
-  { text: 'PostgreSQL', color: '#f59e0b' },
-  { text: 'Docker',     color: '#3b82f6' },
-  { text: 'JWT Auth',   color: '#10b981' },
-  { text: 'REST API',   color: '#6366f1' },
-  { text: 'Git',        color: '#ec4899' },
-  { text: 'Swagger',    color: '#a78bfa' },
-];
-
-const ALL_TECH = [...INNER_WORDS, ...OUTER_WORDS];
 
 function ProfileCard() {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -96,17 +78,11 @@ function ProfileCard() {
         {/* Photo */}
         <div style={{ position: 'relative', overflow: 'hidden' }}>
           <motion.img
-            style={{ scale: imgSc, display: 'block', width: '100%', height: 270 } as React.CSSProperties & { scale: typeof imgSc }}
+            style={{ scale: imgSc, display: 'block', width: '100%', height: 340, objectFit: 'cover', objectPosition: 'center top' } as React.CSSProperties & { scale: typeof imgSc }}
             src={profilePhoto}
             alt="Arun R"
             onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
           />
-          {/* Bottom fade */}
-          <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0, height: 90,
-            background: 'linear-gradient(to top, #130a25 10%, transparent 100%)',
-            pointerEvents: 'none',
-          }} />
 
           {/* Available badge */}
           {personal.available && (
@@ -124,24 +100,6 @@ function ProfileCard() {
           )}
         </div>
 
-        {/* Tech chips */}
-        <div style={{ padding: '0.9rem 1rem 1.1rem', display: 'flex', flexWrap: 'wrap', gap: '5px', justifyContent: 'center' }}>
-          {ALL_TECH.map(w => (
-            <motion.span
-              key={w.text}
-              whileHover={{ scale: 1.1, y: -2 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 16 }}
-              style={{
-                fontSize: '0.6rem', fontWeight: 700, fontFamily: 'monospace',
-                color: w.color, whiteSpace: 'nowrap',
-                background: `${w.color}14`, border: `1px solid ${w.color}38`,
-                padding: '3px 9px', borderRadius: '5px',
-                cursor: 'default',
-                boxShadow: `0 0 7px ${w.color}18`,
-              }}
-            >{w.text}</motion.span>
-          ))}
-        </div>
 
         {/* Cursor glare */}
         <div style={{

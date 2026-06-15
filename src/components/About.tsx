@@ -48,13 +48,13 @@ function ProfileCard() {
       {/* Static gradient border */}
       <div style={{
         position: 'absolute', inset: -2, borderRadius: '1.75rem', zIndex: 0,
-        background: 'linear-gradient(135deg, #6366f1 0%, #ec4899 35%, #10b981 65%, #f59e0b 100%)',
+        background: 'linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #6366f1 100%)',
       }} />
 
       {/* Outer ambient glow */}
       <div style={{
         position: 'absolute', inset: -16, borderRadius: '2.5rem', zIndex: -1,
-        background: 'linear-gradient(135deg, rgba(99,102,241,0.22) 0%, rgba(236,72,153,0.14) 50%, rgba(16,185,129,0.12) 100%)',
+        background: 'linear-gradient(135deg, rgba(99,102,241,0.22) 0%, rgba(236,72,153,0.18) 100%)',
         filter: 'blur(20px)', pointerEvents: 'none',
       }} />
 
